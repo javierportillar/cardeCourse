@@ -1,6 +1,12 @@
 const { Router } = require("express");
 const { booksController } = require("../controllers/books.controller");
-const {validationResult, param} = require("express-validator");
+const { validationResult, param } = require("express-validator");
+const {
+  validateErrosMiddleWare,
+} = require("../middlewares/validateErros.middleware");
+const {
+  validateParamsId, validateParamsBody,
+} = require("../validations/books/validateParamId.validation");
 
 const booksRouter = Router();
 
@@ -8,14 +14,13 @@ const booksRouter = Router();
 booksRouter.get("/", booksController.getAllBooks);
 
 //Obtener un book
-booksRouter.get("/:id", [(req,res,next)=>{
-  param("id").isNumeric().run();
-  const resultValidated = validationResult(req);
-  console.log(resultValidated);
-  return next();
-} ,booksController.getBookById]);
+booksRouter.get("/:id", [
+  validateParamsId,
+  validateErrosMiddleWare,
+  booksController.getBookById,
+]);
 
 //Crear un book
-booksRouter.post("/", booksController.createBook);
+booksRouter.post("/", [validateParamsBody, validateErrosMiddleWare, booksController.createBook]);
 
 module.exports = { booksRouter };

@@ -8,6 +8,7 @@ class BooksService {
   }
 
   async getOneBookById(id){
+    console.log(id);
     const book = await database.getRow(
       `SELECT * FROM BOOKS WHERE id=${id} limit 1`
     );
