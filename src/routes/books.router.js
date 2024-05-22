@@ -5,8 +5,9 @@ const {
   validateErrosMiddleWare,
 } = require("../middlewares/validateErros.middleware");
 const {
-  validateParamsId, validateParamsBody,
-} = require("../validations/books/validateParamId.validation");
+  validateParamsId,
+  validateBooksSchema,
+} = require("../validations/books/books.validation");
 
 const booksRouter = Router();
 
@@ -21,6 +22,10 @@ booksRouter.get("/:id", [
 ]);
 
 //Crear un book
-booksRouter.post("/", [validateParamsBody, validateErrosMiddleWare, booksController.createBook]);
+booksRouter.post("/", [
+  validateBooksSchema,
+  validateErrosMiddleWare,
+  booksController.createBook,
+]);
 
 module.exports = { booksRouter };

@@ -44,8 +44,14 @@ class Database {
   }
   
   async create(SQLQuery){
+    // const result = await this.query(`${SQLQuery} returning *`);
+    const result = await this.createMany(SQLQuery)
+    return result[0];
+  }
+
+  async createMany(SQLQuery){
     const result = await this.query(`${SQLQuery} returning *`);
-    return result.rows[0];
+    return result.rows;
   }
 }
 

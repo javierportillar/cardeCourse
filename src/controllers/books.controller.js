@@ -1,5 +1,8 @@
+const { body } = require("express-validator");
 const { database } = require("../database/database");
 const {booksService} = require("../services/books.services");
+const {categoriesService} = require('../services/categories.service');
+const { authorsService } = require("../services/authors.service");
 
 class BooksController {
   async getAllBooks(req, res) {
@@ -15,6 +18,13 @@ class BooksController {
   }
 
   async createBook(req, res) {
+    const checkCategValidate = await categoriesService.checkCategories(req.body.categories);
+    
+    const checkAuthorsValidate = await authorsService.checkAuthors(req.body.authors);
+
+    if (!checkCategValidate) return res.status(409).json({message: 'No existe la categoría'});
+    if (!checkAuthorsValidate) return res.status(409).json({message: 'No existe el autor'});
+    
     const book = await booksService.createBook(req.body);
     return res.status(201).json(book);
   }
