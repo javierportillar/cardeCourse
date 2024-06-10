@@ -5,7 +5,7 @@ const {
 } = require("../middlewares/validateErros.middleware");
 
 const {
-  validateParamsId,
+  validateParamsId, validateAuthorsSchema
 } = require("../validations/authors/authors.validation");
 
 const authorsRouter = Router();
@@ -17,6 +17,12 @@ authorsRouter.get("/:id", [
   validateParamsId,
   validateErrosMiddleWare,
   authorsController.getAuthorById,
+]);
+
+authorsRouter.post("/",[
+  validateAuthorsSchema,
+  validateErrosMiddleWare,
+  authorsController.createAuthor,
 ]);
 
 module.exports = { authorsRouter };
