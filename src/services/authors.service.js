@@ -1,6 +1,10 @@
 const { database } = require("../database/database");
 
 class AuthorsService {
+  async getAllAuthors() {
+    const authors = await database.getRows("SELECT * FROM AUTHORS");
+    return authors;
+  }
   async checkAuthors(ids) {
     const SQLids = ids.join(",");
     const result = await database.getRows(
