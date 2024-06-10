@@ -1,6 +1,4 @@
-const { body } = require("express-validator");
-const { database } = require("../database/database");
-const {booksService} = require("../services/books.services");
+const {booksService} = require("../services/books.service");
 const {categoriesService} = require('../services/categories.service');
 const { authorsService } = require("../services/authors.service");
 
