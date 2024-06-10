@@ -21,7 +21,21 @@ class BooksService {
       `INSERT INTO books (name, page_number, bibliography, summary) VALUES('${name}',${pages},${bilbiographyValue},${summaryValue})`
     );
     await this.createBooksCategories(categories, book.id);
+    await this.createBookAuthors(authors, book.id);
+
     return book;
+  }
+
+  async createBookAuthors(authors, bookId) {
+    const arrayBookAuthors = authors.map((authorId) => {
+      return `(${authorId},${bookId})`;
+    });
+    const SQLvalues = arrayBookAuthors.join(",");
+    const result = await database.createMany(
+      `INSERT INTO books_authors (author_id, book_id) VALUES ${SQLvalues}`
+    );
+    console.log(result);
+    return result;
   }
 
   async createBooksCategories(categories, bookId) {
