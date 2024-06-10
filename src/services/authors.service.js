@@ -43,23 +43,6 @@ class AuthorsService {
     }
   }
 
-  // async createAuthorsCategories(categories, authorId) {
-  //   if (categories && categories.every((categoryId) => categoryId !== null)) {
-  //     await this.createAuthorsCategories(categories, author.id);
-  //   } else {
-  //     throw new Error("Invalid categories array");
-  //   }
-
-  //   const arrayAuthorsCategories = categories.map((categoryId) => {
-  //     return `( ${authorId},${categoryId})`;
-  //   });
-  //   const SQLvalues = arrayAuthorsCategories.join(",");
-  //   console.log(SQLvalues);
-  //   const result = await database.createMany(
-  //     `INSERT INTO authors_categories (author_id, category_id) VALUES ${SQLvalues}`
-  //   );
-  //   return result;
-  // }
 
   async checkAuthors(ids) {
     const SQLids = ids.join(",");
