@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const { booksController } = require("../controllers/books.controller");
-const { validationResult, param } = require("express-validator");
 const {
   validateErrosMiddleWare,
 } = require("../middlewares/validateErros.middleware");
