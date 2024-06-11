@@ -3,7 +3,7 @@ const {
   categoriesController,
 } = require("../controllers/categories.controller");
 const {
-  validateParamsId,
+  validateParamsId, validateCategoriesSchema
 } = require("../validations/categories/categories.validation");
 const {
   validateErrosMiddleWare,
@@ -17,6 +17,12 @@ categoriesRouter.get("/:id", [
   validateParamsId,
   validateErrosMiddleWare,
   categoriesController.getCategoryById,
+]);
+
+categoriesRouter.post("/", [
+  validateCategoriesSchema,
+  validateErrosMiddleWare,
+  categoriesController.createNewCategory,
 ]);
 
 module.exports = { categoriesRouter };
