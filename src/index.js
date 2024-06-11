@@ -1,5 +1,6 @@
 const { authorsRouter } = require("./routes/authors.router");
 const { booksRouter } = require("./routes/books.router");
+const { categoriesRouter } = require("./routes/categories.router");
 const { Server } = require("./server/server");
 const { config } = require("dotenv");
 
@@ -13,6 +14,7 @@ const server = new Server();
 
 server.addRouter("/books", booksRouter);
 server.addRouter("/authors", authorsRouter);
+server.addRouter("/categories", categoriesRouter);
 
 server.createServer(process.env.PORT, () => {
   console.log("Listening on Port", process.env.PORT);
