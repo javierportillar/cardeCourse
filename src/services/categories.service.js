@@ -12,6 +12,14 @@ class CategoriesService {
     return categorie;
   }
 
+  async createCategory(body) {
+    const { name } = body;
+    const category = await database.create(
+      `INSERT INTO categories (name) VALUES ('${name}')`
+    );
+    return category;
+  }
+
   async checkCategories(ids) {
     const SQLids = ids.join(",");
     const result = await database.getRows(
